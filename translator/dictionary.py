@@ -9,10 +9,21 @@ def translate(word):
         return data[word]
     elif len(get_close_matches(word, data.keys())) > 0:
         yn = input("Maybe you meant %s ? Enter y if yes or n if no: " % get_close_matches(word, data.keys())[0])
-        if yn == 'y':
+        if yn.lower() == 'y':
             return data[get_close_matches(word, data.keys())[0]]
+        elif yn.lower() == 'n':
+            return "Not existing word. Please double check it!"
+        else:
+            return "I didn't understand your query!"
     else:
-        return "Not existing word. Please double check it"
+        return "Not existing word. Please double check it!"
 
 word = input("Enter a word: ")
-print(translate(word))
+
+output = translate(word)
+
+if type(output) == list:
+    for item in output:
+        print(item)
+else:
+    print(output)
